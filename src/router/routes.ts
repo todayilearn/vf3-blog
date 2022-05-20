@@ -9,7 +9,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/write',
     component: () => import('layouts/MainLayout.vue'),
-    children: [{ path: '', component: () => import('src/pages/WritePage.vue') }]
+    children: [{ path: '', component: () => import('src/pages/WriteBtn.vue') }]
   },
 
   // Always leave this as last one,

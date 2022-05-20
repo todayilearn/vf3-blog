@@ -1,37 +1,15 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { initializeApp } from 'firebase/app'
-import firebaseConfig from '../../../firebaseConfig'
+import { auth } from 'boot/firebase'
 import {
-  getAuth,
-  connectAuthEmulator,
   GoogleAuthProvider,
   signInWithPopup,
-  onAuthStateChanged,
-  User,
   signOut
 } from 'firebase/auth'
-
-// :firebase 초기화
-initializeApp(firebaseConfig)
-
-// :에뮬레이터 설정
-const auth = getAuth()
-auth.useDeviceLanguage()
-connectAuthEmulator(auth, 'http://localhost:9099')
+import { firebaseUser, useAuth } from 'src/composables/useAuth'
+useAuth()
 
 // :구글 로그인 인증
 const provider = new GoogleAuthProvider()
-
-// :사용자 데이터 담기
-const firebaseUser = ref<User | null>(null) // 로그인시 User, 비로그인시 null 세팅
-
-// :인증 상태 관찰자 설정 및 사용자 데이터 가져오기(UserImpl)
-onAuthStateChanged(auth, (user) => {
-  firebaseUser.value = user
-  console.log('user : ', user)
-  console.log('firebaseUser : ', firebaseUser)
-})
 </script>
 <template>
   <!-- 로그인시 -->
